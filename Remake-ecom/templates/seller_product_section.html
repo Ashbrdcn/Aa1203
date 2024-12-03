@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Product Section</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-details {
+            padding: 15px;
+        }
+        .product-details h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+        .product-details p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .product-details .price {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Products</h2>
+    <div class="product-container">
+        {% if products %}
+        <ul>
+            {% for product in products %}
+                <li class="product-card">
+                    <img src="{{ url_for('static', filename='uploads/' + product['image_url']) }}" alt="{{ product['name'] }}" class="product-image">
+                    <div class="product-details">
+                        <h3>{{ product['name'] }}</h3>
+                        <p>{{ product['description'] }}</p>
+                        <p>Price: ${{ product['price'] }}</p>
+                        <p>Stock: {{ product['stock_quantity'] }}</p>
+                        <p>Category: {{ product['category'] }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No products available.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

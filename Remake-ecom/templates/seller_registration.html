@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Registration</title>
+  <style>
+    .seller-registration .container {
+      max-width: 800px;
+      margin: 130px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .seller-registration .card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .seller-registration .card-header {
+      background-color: #896CFE;
+      color: #fff;
+      padding: 10px;
+      font-size: 1.5em;
+      text-align: center;
+    }
+
+    .seller-registration .card-body {
+      padding: 20px;
+    }
+
+    .seller-registration .form-group {
+      margin-bottom: 15px;
+    }
+
+    .seller-registration .form-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .seller-registration .form-group {
+      flex: 1;
+    }
+
+    .seller-registration label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .seller-registration input,
+    .seller-registration textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .seller-registration .btn-submit {
+      background-color: #896CFE;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 1em;
+      display: block;
+      margin: 20px auto;
+    }
+
+    .seller-registration .btn-submit:hover {
+      background-color: #7049d8;
+    }
+    .success {
+      color: green;
+      background-color: #e0ffe0;
+  }
+  
+  .danger {
+      color: red;
+      background-color: #ffe0e0;
+  }
+  
+  .info {
+      color: blue;
+      background-color: #e0f0ff;
+  }
+  
+  .warning {
+      color: orange;
+      background-color: #fff3e0;
+  }
+  
+  </style>
+</head>
+
+<body>
+  {% include 'nav_main.html' %}
+
+  <div class="seller-registration">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          Seller Registration
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-3">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <!-- Close button (X) to dismiss the alert -->
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+
+        <div class="card-body">
+          <form action="{{ url_for('seller_registration') }}" method="POST">
+            <!-- Row 1 -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+              </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+              </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" placeholder="Enter your address" required>
+              </div>
+              <div class="form-group">
+                <label for="postalCode">Postal Code</label>
+                <input type="text" id="postalCode" name="postalCode" placeholder="Enter your postal code" required>
+              </div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="businessName">Business Name</label>
+                <input type="text" id="businessName" name="businessName" placeholder="Enter your business name" required>
+              </div>
+              <div class="form-group">
+                <label for="description">Business Description</label>
+                <textarea id="description" name="description" rows="2" placeholder="Describe your business" required></textarea>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn-submit">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

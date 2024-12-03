@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum - Futuristic Navigation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00F5FF;
+            --secondary-color: #7E3AFF;
+            --background-dark: #0A0E1A;
+            --accent-glow: rgba(0,245,255,0.3);
+        }
+
+        body {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            background-color: var(--background-dark);
+            color: white;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, rgba(10,14,26,0.8), rgba(20,25,40,0.6));
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(126,58,255,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-color) !important;
+            letter-spacing: -1px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand::before {
+            content: '◈';
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            position: relative;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            padding: 0.5rem 1rem !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            opacity: 0;
+        }
+
+        .nav-link:hover {
+            opacity: 1;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            opacity: 1;
+        }
+
+        .btn-login, .btn-signup {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            background: transparent;
+        }
+
+        .btn-signup {
+            background: var(--secondary-color);
+            color: white;
+            box-shadow: 0 8px 25px rgba(126,58,255,0.3);
+        }
+
+        .btn-login:hover, .btn-signup:hover {
+            background: var(--primary-color);
+            color: var(--background-dark);
+        }
+
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+
+        .navbar-brand:hover {
+            animation: glitch 1s linear infinite;
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background: rgba(10,14,26,0.95);
+                backdrop-filter: blur(10px);
+                padding: 1rem;
+                border-radius: 0 0 15px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">ExoCloths</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('landing') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('product_page') }}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    {% if session.get('user_id') %}
+                        {% if session.get('seller_status') == 'approved' %}
+                            <!-- Show Seller Dashboard button if approved -->
+                            <a class="nav-link" href="{{ url_for('seller_dashboard') }}">Seller Dashboard</a>
+                        {% else %}
+                            <!-- Show Apply as Seller button if not approved or pending -->
+                            <a class="nav-link" href="{{ url_for('seller_registration') }}">Apply as Seller</a>
+                        {% endif %}
+                        <a href="{{ url_for('cart') }}" class="btn">
+                            <i class="fas fa-shopping-cart" style="color: #00F5FF;"></i>
+                        </a>
+                        <a href="{{ url_for('account') }}" class="btn">
+                            <i class="fas fa-user" style="color: #00F5FF;"></i>
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="btn btn-login me-2">Login</a>
+                        <a href="{{ url_for('signup') }}" class="btn btn-signup">Sign Up</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10,14,26,0.9)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, rgba(10,14,26,0.8), rgba(20,25,40,0.6))';
+                navbar.style.backdropFilter = 'blur(10px)';
+            }
+        });
+    </script>
+</body>
+</html>

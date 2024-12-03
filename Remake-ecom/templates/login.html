@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    {% include 'nav_main.html'%}
+    <section class="login-page">
+        <div class="container-fluid login-container">
+            <div class="row h-100">
+                <!-- Left Panel -->
+                <div class="col-lg-6 left-panel d-flex align-items-center justify-content-center">
+                    <h1 class="headline-text text-center">FIND CLOTHES THAT MATCH YOUR STYLE</h1>
+                </div>
+
+                <!-- Right Panel -->
+                <div class="col-lg-6 right-panel d-flex align-items-center">
+                    <div class="login-form w-100 p-4">
+                        <!-- Flash Messages -->
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div class="container mt-3">
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                        {{ message }}
+                                        <!-- Close button (X) to dismiss the alert -->
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        {% endwith %}
+                      
+                        <!-- Login Form -->
+                        <form method="post" action="{{ url_for('login') }}">
+                            <h2 class="login-title text-center mb-4">Login</h2>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                            </div>
+                            <button type="submit" class="btn btn-dark w-100" id="login_btn">Login</button>
+
+                            <!-- Signup Link -->
+                            <div class="text-center mt-3">
+                                <span>Don't have an account?</span>
+                                <a href="{{ url_for('signup') }}" class="text-decoration-none">Create an account</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

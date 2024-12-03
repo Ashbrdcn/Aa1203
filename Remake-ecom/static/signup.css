@@ -1,0 +1,152 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.signup-page {
+    min-height: 100vh;
+    background-color: #0A0E1A;
+}
+
+.signup-container {
+    height: 100vh;
+}
+
+.left-panel {
+    background-color: #0A0E1A;
+    padding: 4rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+}
+
+.headline-text {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #00F5FF;
+    line-height: 1.2;
+    max-width: 600px;
+}
+
+.right-panel {
+    background-color:#0A0E1A;;
+    padding: 4rem 2rem;
+    display: flex;
+    align-items: center;
+    min-height: 100%;
+}
+
+.signup-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.signup-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    color: #00F5FF;
+}
+
+.form-control {
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    border: solid 1px #00F5FF;
+}
+
+.form-control:focus {
+    border-color: #212529;
+    box-shadow: 0 0 0 0.2rem rgba(33, 37, 41, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #00F5FF;
+}
+
+.btn-dark {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background-color: #0A0E1A;
+    border: solid 1px #00F5FF;
+    transition: background-color 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: #7E3AFF;  
+}
+
+.account-creation-link {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.text-create-account {
+    color: #212529;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 0.5rem;
+}
+
+.text-create-account:hover {
+    text-decoration: underline;
+}
+
+.alert {
+    margin-bottom: 2rem;
+}
+#signup_btn{
+    background-color: #0A0E1A;
+    border: solid 1px #00F5FF;
+}
+#signup_btn:hover{
+    background-color: #00F5FF;
+    color: #0A0E1A;
+    transition: 0.5s ease-in;
+}
+span{
+    color: #7E3AFF;
+}
+.success {
+    color: green;
+    background-color: #e0ffe0;
+}
+
+.danger {
+    color: red;
+    background-color: #ffe0e0;
+}
+
+.info {
+    color: blue;
+    background-color: #e0f0ff;
+}
+
+.warning {
+    color: orange;
+    background-color: #fff3e0;
+}
+
+@media (max-width: 991.98px) {
+    .left-panel {
+        min-height: 300px;
+    }
+    
+    .headline-text {
+        font-size: 2.5rem;
+    }
+
+    .right-panel {
+        padding: 3rem 1.5rem;
+    }
+
+    .signup-title {
+        font-size: 2rem;
+    }
+}

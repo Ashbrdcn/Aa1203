@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% include 'nav_main.html'%}
+    <h1>Your Cart</h1>
+<div class="cart-container">
+    {% if products %}
+        {% for product in products %}
+            <div class="cart-item">
+                <img src="{{ url_for('static', filename='uploads/' + product['image_url']) }}" alt="{{ product['name'] }}" class="product-image">
+                <div class="product-details">
+                    <h3>{{ product['name'] }}</h3>
+                    <p>${{ product['price'] }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        <p><strong>Total:</strong> ${{ total_price }}</p> <!-- Calculate the total in the backend -->
+        <a href="{{ url_for('checkout') }}" class="checkout-btn">Proceed to Checkout</a>
+    {% else %}
+        <p>No items in your cart.</p>
+    {% endif %}
+</div>
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cart-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .product-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product-details {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .product-details h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .product-details p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .remove-btn {
+            background: #ff4d4f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .remove-btn:hover {
+            background: #d9363e;
+        }
+
+        .cart-summary {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .cart-summary p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .checkout-btn {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: #45a049;
+        }
+
+        .empty-cart {
+            text-align: center;
+            font-size: 18px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    {% include 'nav_main.html' %}
+    
+    <h1>Your Cart</h1>
+    <div class="cart-container">
+        {% if products %}
+            {% for product in products %}
+                <div class="cart-item">
+                    <img src="{{ url_for('static', filename='uploads/' + product['image_url']) }}" alt="{{ product['name'] }}" class="product-image">
+                    <div class="product-details">
+                        <h3>{{ product['name'] }}</h3>
+                        <p>${{ product['price'] }}</p>
+                    </div>
+                    <form action="{{ url_for('remove_from_cart', product_id=product['id']) }}" method="POST">
+                        <button type="submit" class="remove-btn">Remove</button>
+                    </form>
+                </div>
+            {% endfor %}
+            <div class="cart-summary">
+                <p><strong>Total:</strong> ${{ total_price }}</p> <!-- Calculate the total in the backend -->
+                <a href="{{ url_for('checkout') }}" class="checkout-btn">Proceed to Checkout</a>
+            </div>
+        {% else %}
+            <p class="empty-cart">No items in your cart.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approved Sellers</title>
+</head>
+<body>
+    {% include 'nav_admin.html' %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Approved Sellers List</h1>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>User ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>Postal Code</th>
+                        <th>Business Name</th>
+                        <th>Description</th>
+                        <th>Created at</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for seller in sellers %}
+                    <tr>
+                        <td>{{ seller.id }}</td>
+                        <td>{{ seller.user_id or 'N/A' }}</td>
+                        <td>{{ seller.first_name }}</td>
+                        <td>{{ seller.last_name }}</td>
+                        <td>{{ seller.email }}</td>
+                        <td>{{ seller.phone_number }}</td>
+                        <td>{{ seller.address }}</td>
+                        <td>{{ seller.postal_code }}</td>
+                        <td>{{ seller.business_name }}</td>
+                        <td>{{ seller.description }}</td>
+                        <td>{{ seller.created_at }}</td>
+                        <td>
+                            <span class="badge bg-success">{{ seller.status | capitalize }}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
